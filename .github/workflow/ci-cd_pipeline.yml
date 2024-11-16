@@ -58,10 +58,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: login to docker hub
         env:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-        run: docker login -u $username -p $password
-      - name: build the docker image
-        run: docker build . -t kamano7/portfolio:latest
-      - name:
-        run: docker push kamano7/portfolio:latest
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+        run: docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
