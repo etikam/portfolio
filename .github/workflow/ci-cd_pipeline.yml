@@ -27,28 +27,28 @@ jobs:
           pip install -r requirements.txt
 
 
-  test:
-    runs-on: ubuntu-latest
-    needs: check_syntaxe
-    services:
-      postgres:
-        image: postgres:15.8
-        env:
-          POSTGRES_USER: portfolio
-          POSTGRES_PASSWORD: portfolio
-          POSTGRES_DB: portfolio_db
-        ports:
-          - 5459:5432
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.12'
-      - name: Install dependencies
-        run: make install_dev
-      # - name: Run tests
-      #   run: make test
+  # test:
+  #   runs-on: ubuntu-latest
+  #   needs: check_syntaxe
+  #   services:
+  #     postgres:
+  #       image: postgres:15.8
+  #       env:
+  #         POSTGRES_USER: portfolio
+  #         POSTGRES_PASSWORD: portfolio
+  #         POSTGRES_DB: portfolio_db
+  #       ports:
+  #         - 5459:5432
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Set up python
+  #       uses: actions/setup-python@v2
+  #       with:
+  #         python-version: '3.12'
+  #     - name: Install dependencies
+  #       run: make install_dev
+  #     # - name: Run tests
+  #     #   run: make test
 
   build:
     name: Build & Push
