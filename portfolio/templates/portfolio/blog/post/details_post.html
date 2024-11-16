@@ -27,13 +27,13 @@
     color: black;
     border-width: 1px;
     border-style: solid;
-    border-radius: 13px; 
+    border-radius: 13px;
 }
 
 #profile{
     background-color: unset;
-    
-} 
+
+}
 
 #post{
     margin: 10px;
@@ -84,7 +84,7 @@ body{
     padding-left: 40px;
     padding-right: 30px;
     padding-top: 10px;
-    
+
 }
 .comment h4,.comment span,.darker h4,.darker span{
     display: inline;
@@ -165,8 +165,8 @@ form{
             <!-- <h4>Enim qui eos rerum in delectus</h4>
             <p>Nam voluptatem quasi numquam quas fugiat ex temporibus quo est. Quia aut quam quod facere ut non occaecati ut aut. Nesciunt mollitia illum tempore corrupti sed eum reiciendis. Maxime modi rerum.</p> -->
 
-            
-            <!-- <img src="{{post.category.last.image.url}}" alt="" class="img-fluid 
+
+            <!-- <img src="{{post.category.last.image.url}}" alt="" class="img-fluid
              services-img"> -->
 
              <p> {{post.content|slice:':200'}}-</p>
@@ -174,8 +174,8 @@ form{
 
           <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
             <img src="{{post.image.url}}" alt="" class="img-fluid services-img " style="height: 500px; width:fit-content">
-            
-           
+
+
             <p>
               {{post.content|slice:'101:'}}
             </p>
@@ -190,7 +190,7 @@ form{
               <div class="row">
                   <div class="col-sm-5 col-md-6 col-12 pb-4">
                       <h1 class="text-dark">Comments</h1>
-                    
+
                     {% if post.comments %}
                       {% for comment in post.comments.all %}
                         <div class="row comment mt-4 text-justify">
@@ -208,7 +208,7 @@ form{
                     <h3>Laissez un commentaire</h3>
                     <form method="post">
                       {% csrf_token %}
-                      
+
                       {% for field in form %}
                         <div class="form-group">
                           {{ field.label_tag }} {{ field }}
@@ -217,7 +217,7 @@ form{
                           {% endif %}
                         </div>
                       {% endfor %}
-                      
+
                       <button type="submit" class="btn btn-primary">Commenter</button>
                     </form>
                   </div>
@@ -227,13 +227,13 @@ form{
         <!-- fin section commenaitre -->
 
       </div>
-        
+
 
 
 
       <div class="row" style="margin-left: 10%; margin-right:30%">
-        
-        
+
+
       </div>
     </section><!-- /Service Details Section -->
 

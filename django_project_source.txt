@@ -26,7 +26,7 @@ class RegisterForm(forms.ModelForm):
         label='Confirm Password',
         widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
-    
+
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
@@ -61,7 +61,7 @@ from django.test import TestCase
 from django.urls import path
 from .views import loginView, registerView, logoutView
 
-app_name = 'account' 
+app_name = 'account'
 urlpatterns = [
 
     path('login/',loginView,name="login"),
@@ -90,29 +90,29 @@ def registerView(request):
             password = form.cleaned_data.get('password1')
             password2 = form.cleaned_data.get('password2')
             # is_writer = form.cleaned_data.get('is_writer')
-            
-            
+
+
             if(password!=password2):
                 messages.error(request,'les mots de passes saisis ne correspondent pas')
                 pass
             else:  # Créer l'utilisateur en utilisant create_user
-                user = User.objects.create_user(username=username, 
-                                                email=email, 
+                user = User.objects.create_user(username=username,
+                                                email=email,
                                                 password=password,
                                                 )
                 user.first_name = first_name
                 user.last_name = last_name
                 if is_writer:
                     user.is_writer= True
-                
+
                 user.save()
                 # Connecter l'utilisateur après la création
                 login(request, user)
-            
+
                 return redirect('home')
     else:
         form = RegisterForm()
-    
+
     return render(request, 'register.html', {'form': form})
 
 
@@ -209,7 +209,7 @@ class Category(models.Model):
     name = models.CharField(max_length = 150)
     image = models.ImageField(upload_to="category_images", height_field=None, width_field=None, max_length=100)
 
-    
+
 
     class Meta:
         verbose_name = ("Category")
@@ -218,7 +218,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    
+
 
 
 class Article(models.Model):
@@ -238,12 +238,12 @@ class Article(models.Model):
 
 class Comment(models.Model):
     content = models.TextField()
-    article = models.ForeignKey(Article, on_delete=models.CASCADE,related_name='comments') 
+    article = models.ForeignKey(Article, on_delete=models.CASCADE,related_name='comments')
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     def __str__(self)->str:
         return f'{self.created_at}'
-    
+
     class Meta:
         ordering = ('-created_at',)
 
@@ -281,30 +281,30 @@ class PostListView(generic.ListView):
     context_object_name = 'posts'
 
 
-    
+
 #Details post
 class PostDetails(generic.DetailView):
     model = Article
     template_name = 'portfolio/blog/post/details_post.html'
     context_object_name = 'post'
-    
+
     def get_context_data(self, **kwargs) -> dict:
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         context['form'] = CommentForm()
         return context
-    
-    
+
+
     def post(self, request, **kwargs):
-        
+
         self.object = self.get_object()
         form = CommentForm(request.POST)
-        
+
         if form.is_valid():
-            
+
             comment = form.save(commit=False)
-            comment.article = self.object  
-            comment.user = request.user    
+            comment.article = self.object
+            comment.user = request.user
             comment.save()
 
             # Redirection après validation du commentaire
@@ -478,11 +478,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  #
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ========== C:\Users\pc\Desktop\CoursBackend_NimbaHub\CoursDjango\portfolio\config\settings_prod.py ==========
-from .settings import * 
+from .settings import *
 
 
 SECRET_KEY = ""
-DEBUG = False 
+DEBUG = False
 
 ========== C:\Users\pc\Desktop\CoursBackend_NimbaHub\CoursDjango\portfolio\config\urls.py ==========
 """
@@ -617,22 +617,22 @@ class SkillsForm(forms.ModelForm):
             )
         }
 
- 
+
     def clean_label(self):
-        label = self.cleaned_data['label'] 
+        label = self.cleaned_data['label']
         if not label:
             raise forms.ValidationError('Le libellé ne doit pas être vide.')
         return label
 
     # Validation personnalisée pour le champ 'level'
     def clean_level(self):
-        level = self.cleaned_data['level']  
-        if level is None:  
+        level = self.cleaned_data['level']
+        if level is None:
             raise forms.ValidationError('Vous ne pouvez pas créer une compétence sans niveaux de compétence.')
-        
-        if level < 0 or level > 100:  
+
+        if level < 0 or level > 100:
             raise forms.ValidationError("Le niveau doit être compris entre 0 et 100.")
-        
+
         return level
 
 ========== C:\Users\pc\Desktop\CoursBackend_NimbaHub\CoursDjango\portfolio\portfolio\models.py ==========
@@ -645,7 +645,7 @@ import uuid
 class Skills(models.Model):
     label = models.CharField(max_length = 150)
     level= models.IntegerField()
-    
+
     def __str__(self):
         return self.label
 
@@ -664,7 +664,7 @@ class CategorieProject(models.Model):
 
     def __str__(self) -> str:
         return self.label
-    
+
 
 
 
@@ -688,7 +688,7 @@ class ImageProject(models.Model):
     projet = models.ForeignKey(Projects,on_delete=models.CASCADE, related_name="images")
     def __str__(self) -> str:
         return f'{self.uid}'
-    
+
 
 
 class Formation(models.Model):
@@ -701,12 +701,12 @@ class Formation(models.Model):
 
     def __str__(self):
         return f'{self.label} - {self.trainer}'
- 
+
 
 class SoftSkill(models.Model):
     label = models.CharField(max_length=100)
     description = models.TextField()
-    
+
     def __str__(self) -> str:
         return self.label
 
@@ -741,10 +741,10 @@ from blog.models import Article,Comment
 # Create your views here.
 
 def index(request):
-    
+
     #my skills
     skills = Skills.objects.all()
-    #my projects 
+    #my projects
     projects = Projects.objects.all().order_by('-published_at')
     #categories projects
     projects_categories = CategorieProject.objects.all()
@@ -755,13 +755,13 @@ def index(request):
         if form.is_valid():
             form.save()
             # messages.success(request,'Compétenses ajoutée avec succès')
-    
+
     #Récupération des formations suivies
     trainings = Formation.objects.all().order_by('date_completed')
-    
+
     #Récupération des compétences propres (sofltSkills)
     softskills = SoftSkill.objects.all()
-    
+
     # Récupération des 5 derniers post du blog
     last_post = Article.objects.all().order_by('date')[:5]
 
@@ -788,8 +788,8 @@ class ProjectDetailView(DetailView):
     model = Projects
     template_name = 'portfolio/projets/details.html'
     context_object_name = 'project'
-    
-    
+
+
 
 def custom_404_view(request, exception=None):
     context = {
@@ -823,4 +823,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

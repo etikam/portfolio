@@ -1,13 +1,14 @@
+from __future__ import annotations
+
 from django.contrib import admin
-from .models import (
-    Skills,
-    CategorieProject,
-    ImageProject,
-    Technologies,
-    Projects,
-    Formation,
-    SoftSkill,
-)
+
+from .models import CategorieProject
+from .models import Formation
+from .models import ImageProject
+from .models import Projects
+from .models import Skills
+from .models import SoftSkill
+from .models import Technologies
 
 # Register your models here.
 

@@ -1,9 +1,18 @@
+from __future__ import annotations
+
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView
+from django.views.generic import DetailView
+
 from .forms import SkillsForm
-from .models import Skills, Projects, CategorieProject, Formation, SoftSkill
-from blog.models import Article, Comment
+from .models import CategorieProject
+from .models import Formation
+from .models import Projects
+from .models import Skills
+from .models import SoftSkill
+from blog.models import Article
+from blog.models import Comment
 
 # Create your views here.
 
@@ -63,4 +72,4 @@ def custom_404_view(request, exception=None):
         "detail": "Impossible de touver la ressource demander, veuillez venir à la page d'accueil",
         "status": 404,
     }
-    return render(request, "portofolio/customs_error_pages/404.html")
+    return render(request, "portfolio/customs_error_pages/404.html")

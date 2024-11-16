@@ -1,5 +1,10 @@
+from __future__ import annotations
+
 from django.urls import path
-from .views import loginView, registerView, logoutView
+
+from .views import loginView
+from .views import logoutView
+from .views import registerView
 
 app_name = "account"
 urlpatterns = [

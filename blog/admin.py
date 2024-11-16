@@ -1,5 +1,10 @@
+from __future__ import annotations
+
 from django.contrib import admin
-from blog.models import Article, Comment, Category
+
+from blog.models import Article
+from blog.models import Category
+from blog.models import Comment
 
 # Register your models here.
 

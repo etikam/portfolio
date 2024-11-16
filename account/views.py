@@ -1,8 +1,15 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth import get_user_model
-from .forms import RegisterForm, LoginForm
+from __future__ import annotations
+
 from django.contrib import messages
+from django.contrib.auth import authenticate
+from django.contrib.auth import get_user_model
+from django.contrib.auth import login
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+from django.shortcuts import render
+
+from .forms import LoginForm
+from .forms import RegisterForm
 
 User = get_user_model()
 

@@ -1,7 +1,13 @@
-from django.shortcuts import render, redirect
+from __future__ import annotations
+
+from django.shortcuts import redirect
+from django.shortcuts import render
 from django.urls import reverse
 from django.views import generic
-from .models import Article, Category, Comment
+
+from .models import Article
+from .models import Category
+from .models import Comment
 from blog.forms import CommentForm
 
 # Create your views here.
