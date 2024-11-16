@@ -1,0 +1,38 @@
+<section id="services" class="services section">
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Formations</h2>
+    <p>Découvrez ci-dessous les formations que j'ai suivies.</p>
+  </div><!-- End Section Title -->
+
+  <div class="container">
+    <div class="row gy-4">
+
+      {% for training in trainings %}
+      <div class="col-lg-4 col-md-6 service-item d-flex d-flex flex-stack position-relative mt-8 alert alert-primary" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+        <div class="icon flex-shrink-0">
+          <!-- Utilisation d'une icône pour symboliser les formations -->
+          <i class="bi bi-book"></i>
+        </div>
+        <div>
+          <h4 class="title">{{ training.label }}</h4>
+          <p class="description"><strong>Institution :</strong> {{ training.trainer }}</p>
+          <p class="description"><i class="bi bi-calendar4-week"></i> <strong>Début :</strong> {{ training.date_started }}</p>
+          <p class="description"><i class="bi bi-calendar-check"></i> <strong>Fin :</strong> {{ training.date_completed }}</p>
+          <p class="description"><i class="bi bi-clock"></i> <strong>Durée :</strong> {{ training.duration }}</p>
+          
+          {% if training.certificate %}
+          <p class="description">
+            <i class="bi bi-file-earmark"></i>
+            <a href="{{ training.certificate.url }}" class="stretched-link" download>Télécharger le certificat</a>
+          </p>
+          {% else %}
+          <p class="description"><i class="bi bi-file-earmark"></i> Aucun certificat disponible</p>
+          {% endif %}
+        </div>
+      </div><!-- End Formation Item -->
+      {% endfor %}
+
+    </div>
+  </div>
+</section><!-- /Formations Section -->

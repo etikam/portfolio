@@ -1,0 +1,55 @@
+<section id="resume" class="resume section">
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Résumé</h2>
+    <p>Passionné de l'informatique, je souhaite évoluer dans le domaine de la sécurité informatique notamment la Cyber Sécurité, la programmation embarquée et l'intelligence Artificielle. Je cherche donc à grimper en compétences techniques à travers des formations et des projets pratiques dans le but de me perfectionner et pouvoir mener à bout mes projets.</p>
+  </div><!-- End Section Title -->
+
+  <div class="container">
+    <div class="row">
+      <!-- Left column -->
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+        <h3 class="resume-title">Sommaire</h3>
+        <div class="resume-item pb-0">
+          <h4>TAMBA ETIENNE KAMANO</h4>
+          <p><em>Développeur passionné avec des compétences dans plusieurs technologies, notamment l'IA, la cybersécurité, et le développement web.</em></p>
+          <ul>
+            <li>Conakry/Matoto/Aviation/Tanènè Marché</li>
+            <li>(+224) 627613835</li>
+            <li>etiennedheleine2000@gmail.com</li>
+          </ul>
+        </div><!-- End Resume Item -->
+
+        <h3 class="resume-title">Éducation</h3>
+        <div class="resume-item">
+          <h4>Licence en Informatique (Développement Logiciel)</h4>
+          <h5>2021 - 2023</h5>
+          <p><em>Université Gamal Abdel Nasser de Conakry</em></p>
+          <p>Étudiant sortant, spécialisé en développement logiciel et passionné par la cybersécurité et l'intelligence artificielle.</p>
+        </div><!-- End Resume Item -->
+
+        0
+        <div class="resume-item">
+          <h4>Baccalauréat Unique (Sciences Mathématiques)</h4>
+          <h5>2017 - 2021</h5>
+          <p><em>Lycée Josip Broz Tito de Gueckedou</em></p>
+          <p>Formation scientifique de haut niveau, avec un focus sur les mathématiques et les sciences physiques.</p>
+        </div><!-- End Resume Item -->
+      </div><!-- End Left Column -->
+
+      <!-- Right column -->
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+        
+
+        <h3 class="resume-title">Compétences Personnelles (Soft Skills)</h3>
+        <div class="resume-item">
+          <ul>
+            {% for skill in softskills %} 
+            <li><strong>{{skill.label}} :</strong>{{skill.description}}</li>
+            {% endfor %}
+            
+        </div><!-- End Resume Item -->
+        
+    </div>
+  </div>
+</section><!-- End Résumé Section -->

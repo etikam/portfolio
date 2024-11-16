@@ -1,28 +1,36 @@
-{% extends 'portfolio/index.html' %}
 
 
-{% block main %}
-    
-
-    
-<form method="post" novalidate>
-    {% csrf_token %}
-    
-    {% for field in form %}
-        <div class="form-group">
-            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-            {{ field }}  
-
-            {% if field.errors %}
-                <div class="text-danger">
-                    {% for error in field.errors %}
-                        <p>{{ error }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-    {% endfor %}
-
-    <button type="submit" class="btn btn-primary">Soumettre</button>
-</form>
-{% endblock main %}
+        <div class="modal-body">
+            <form method="post" novalidate action="{% url 'home'%}" >
+                {% csrf_token %}
+    
+                {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                    <div class="text-danger">
+                        {% for error in field.errors %}
+                        <p class="text-danger small">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Soumettre</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                </div>
+            </form>
+        </div>
+       
+      </div>
+    </div>
+  </div>

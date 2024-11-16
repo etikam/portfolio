@@ -1,0 +1,87 @@
+{% extends "portfolio/index.html" %}
+{% block main %}
+<main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title dark-background">
+        <div class="container d-lg-flex justify-content-between align-items-center">
+            <h1 class="mb-2 mb-lg-0">Détails du projet</h1>
+            <nav class="breadcrumbs">
+                <ol>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li class="current">Détails du projet</li>
+                </ol>
+            </nav>
+        </div>
+    </div><!-- End Page Title -->
+
+    <!-- Portfolio Details Section -->
+    <section id="portfolio-details" class="portfolio-details section">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row gy-4">
+                <div class="col-lg-8">
+                    <div class="portfolio-details-slider swiper init-swiper">
+                        <script type="application/json" class="swiper-config">
+                        {
+                            "loop": true,
+                            "speed": 600,
+                            "autoplay": {
+                                "delay": 5000
+                            },
+                            "slidesPerView": "auto",
+                            "pagination": {
+                                "el": ".swiper-pagination",
+                                "type": "bullets",
+                                "clickable": true
+                            }
+                        }
+                        </script>
+
+                        <div class="swiper-wrapper align-items-center">
+                            {% for image in project.images.all %}
+                                <div class="swiper-slide">
+                                    <img src="{{ image.image.url }}" alt="{{ image.catption }}" class="img img-fluid">
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
+                        <h3>À propos du projet</h3>
+                        <ul>
+                            <li><strong>Catégorie</strong>: {{ project.categories.label }}</li>
+                            <li><strong>Date du projet</strong>: {{ project.published_at|date:"d M, Y" }}</li>
+                            <li><strong>URL du projet</strong>:
+                                {% if project.url %}
+                                    <a href="{{ project.url }}" target="_blank">{{ project.url }}</a>
+                                {% else %}
+                                    Non disponible
+                                {% endif %}
+                            </li>
+                            <li><strong>Statut</strong>: 
+                                {% if project.status == '1' %}
+                                    En cours
+                                {% elif project.status == '2' %}
+                                    Réalisé
+                                {% elif project.status == '3' %}
+                                    En production
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
+                        <h2>Description du projet</h2>
+                        <p>{{ project.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- /Portfolio Details Section -->
+
+</main>
+{% endblock main %}
+
+

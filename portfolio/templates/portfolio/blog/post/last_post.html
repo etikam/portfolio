@@ -1,0 +1,62 @@
+<section id="blog" class="testimonials section light-background">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Mon Blog</h2>
+      <p>Explorez avec moi le monde de la téchnologie avec mon blog enrichi d'articles enrichissants</p>
+    </div><!-- End Section Title -->
+
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+      <div class="swiper init-swiper text-center">
+        <script type="application/json" class="swiper-config">
+          {
+            "loop": true,
+            "speed": 600,
+            "autoplay": {
+              "delay": 5000
+            },
+            "slidesPerView": "auto",
+            "pagination": {
+              "el": ".swiper-pagination",
+              "type": "bullets",
+              "clickable": true
+            },
+            "breakpoints": {
+              "320": {
+                "slidesPerView": 1,
+                "spaceBetween": 40
+              },
+              "1200": {
+                "slidesPerView": 3,
+                "spaceBetween": 1
+              }
+            }
+          }
+        </script>
+        <div class="swiper-wrapper">
+
+          {% for post in last_post %}
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>{{post.content|slice:':100'}}</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+                <img src="{{post.image.url}}" class="testimonial-img" alt="">
+                <h3>{{post.title}}</h3>
+                <h4>{{post.category.first.name}}</h4>
+                <a href="" class="btn btn-primary">Lire</a>
+              </div>
+            </div><!-- End testimonial item -->
+          {% endfor %}
+
+
+        </div>
+        <div class="swiper-pagination"></div>
+        <a href="{% url 'blog:blog_index'%}" class="btn btn-outline-primary mt-5">Publications</a>
+      </div>
+
+    </div>
+  </section><!-- /Testimonials Section -->
