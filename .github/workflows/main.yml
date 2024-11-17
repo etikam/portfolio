@@ -62,3 +62,7 @@ jobs:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
         run: docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+      - name: build the docker image
+        run: docker build . -t kamano7/portfolio:latest
+      - name:
+        run: docker push kamano7/portfolio:latest
