@@ -56,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [check_syntaxe]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: login to docker hub
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
