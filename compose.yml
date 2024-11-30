@@ -1,3 +1,7 @@
+networks:
+  traefik-public:
+    external: true
+
 services:
   db:
     image: postgres:15.8
@@ -5,10 +9,31 @@ services:
       - 5459:5432
     environment:
       - POSTGRES_USER=portfolio
-      - POSTGRES_PASSWORD=portfolio
+      - POSTGRES_PASSWORD=cP2t$c76*prg7Mh
     volumes:
       - pg_data_portfolio:/var/lib/postgresql/data
       - ./init-scripts:/docker-entrypoint-initdb.d
+
+  web:
+    image: kamano7/portfolio:latest
+    env_file:
+      - .env
+
+    restart: always
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik-public
+      - traefik.http.routers.app-http.rule=Host(`${DOMAIN?Variable not set}`)
+      - traefik.http.routers.app-http.entrypoints=http
+      - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
+      - traefik.http.routers.app-https.rule=Host(`${DOMAIN?Variable not set}`)
+      - traefik.http.routers.app-http.entrypoints=https
+      - traefik.http.routers.app-http.tls=true
+      - traefik.http.routers.app-http.tls.certresolver=le
+      - traefik.http.routers.services.app.loadbalancer.server.port=8080
+    networks:
+      - traefik-public
+
 
 volumes:
   pg_data_portfolio:

@@ -1,0 +1,39 @@
+services:
+  traefik:
+    image: traefik:v2.10
+      - .env
+    ports:
+      - "80:80"
+      - "443:443"
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik-public
+      - traefik.contraint-label=traefik-public
+      - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
+      - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
+      - traefik.http.middleware.https-compress.compress=true
+    volumes:
+      - /var/run/docker.sock:ro
+      - traefik-public-certiicates:/certificates
+      - /var/log/traefik:var/log
+    command:
+      - --providers.docker
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.http.adress=:80
+      - --entrypoints.https.adress=:443
+      - --certificatesresolvers.le.acme.email=etiennedheleine2000@gmail.com
+      - --certificatesresolvers.le.acme.tlschallenges=true
+      - --accesslog
+      - --log
+      - --acesslog.filePath=/var/log/access.log
+      - --api
+    networks:
+      - traefik-public
+
+
+  volumes:
+    traefik-public-certificates:
+
+  networks:
+    traefik-public:
+      external: true
