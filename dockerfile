@@ -1,5 +1,4 @@
-FROM python:3.13-bookwarm
-
+FROM python:3.13-bookworm
 # Ne pas écrire de fichiers .pyc
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV DJANGO_SETTINGS_MODULE=config.settings_prod
