@@ -3,17 +3,16 @@ networks:
     external: true
 
 services:
-  db:
-    image: postgres:15.8
-    ports:
-      - 5459:5432
-    environment:
-      - POSTGRES_USER=portfolio
-      - POSTGRES_PASSWORD=cP2t$c76*prg7Mh
-    volumes:
-      - pg_data_portfolio:/var/lib/postgresql/data
-      - ./init-scripts:/docker-entrypoint-initdb.d
-
+  # db:
+  #   image: postgres:15.8
+  #   ports:
+  #     - 5459:5432
+  #   environment:
+  #     - POSTGRES_USER=portfolio
+  #     - POSTGRES_PASSWORD=cP2t$c76*prg7Mh
+  #   volumes:
+  #     - pg_data_portfolio:/var/lib/postgresql/data
+  #     - ./init-scripts:/docker-entrypoint-initdb.d
   web:
     image: kamano7/portfolio:latest
     env_file:
