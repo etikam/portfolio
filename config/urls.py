@@ -17,8 +17,10 @@ Including another URLconf
 from __future__ import annotations
 
 from debug_toolbar.toolbar import debug_toolbar_urls
+from django.conf import settings
 from django.conf.urls import handler404
 from django.conf.urls import handler500
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include
 from django.urls import path
@@ -32,4 +34,4 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("blog/", include("blog.urls")),
     path("auth/", include("account.urls")),
-] + debug_toolbar_urls()
+] + debug_toolbar_urls() + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

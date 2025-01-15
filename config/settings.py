@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-bfgh9e-02sq5#9c7@7c940$rc(u202v@03s1@xbt-x_eoi^3bp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1", "192.168.1.198"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -50,11 +50,14 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    # "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+if DEBUG:
+    MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
+
 
 ROOT_URLCONF = "config.urls"
 
@@ -130,6 +133,8 @@ STATIC_URL = "static/"
 # Media files settings
 MEDIA_URL = "/media/"  # URL for accessing media files
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")  #
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # Répertoire où collectstatic rassemblera les fichiers
 
 
 # Default primary key field type
